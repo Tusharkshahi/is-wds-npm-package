@@ -25,7 +25,7 @@ jobs:
           npm version patch # Change to `minor` or `major` if required
           git push --follow-tags
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.MY_CUSTOM_NPM_TOKEN }}
 
       - name: Publish to NPM
         run: npm publish
