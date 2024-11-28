@@ -1,5 +1,5 @@
 {
-  "name": "@web-dev-simplified/is-wds",
+  "name": "@tusharkshahi/testcicd-tushar",
   "version": "1.0.0",
   "description": "Is the string WDS?",
   "main": "index.js",
@@ -8,15 +8,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/WebDevSimplified/is-wds-npm-package.git"
+    "url": "git+https://github.com/Tusharkshahi/is-wds-npm-package"
   },
   "keywords": [
     "WDS"
   ],
-  "author": "Web Dev Simplified",
+  "author": "Tushar",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/WebDevSimplified/is-wds-npm-package/issues"
+    "url": "https://github.com/Tusharkshahi/is-wds-npm-package/issues"
   },
-  "homepage": "https://github.com/WebDevSimplified/is-wds-npm-package#readme"
+  "homepage": "https://github.com/Tusharkshahi/is-wds-npm-package/readme",
+  "publishConfig": {
+    "access": "public"
+  }
 }
