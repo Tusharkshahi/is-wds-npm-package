@@ -1,0 +1,33 @@
+name: Update NPM Package Version
+
+on:
+  workflow_dispatch: # Trigger manually through the GitHub Actions UI
+
+jobs:
+  update-npm-version:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Update NPM package version
+        run: |
+          npm version patch # Change to `minor` or `major` if required
+          git push --follow-tags
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish to NPM
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
