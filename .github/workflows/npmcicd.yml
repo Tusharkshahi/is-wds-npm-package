@@ -1,33 +1,33 @@
-name: Update NPM Package Version
+name: Publish to npm
 
 on:
-  workflow_dispatch: # Trigger manually through the GitHub Actions UI
+  release:
+    types: [published]
 
 jobs:
-  update-npm-version:
+  publish:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+    - name: Check out repository
+      uses: actions/checkout@v3
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '16'
+        registry-url: 'https://registry.npmjs.org/'
+        check-latest: false
 
-      - name: Install dependencies
-        run: npm install
+    - name: Install dependencies
+      run: npm install
 
-      - name: Update NPM package version
-        run: |
-          npm version patch # Change to `minor` or `major` if required
-          git push --follow-tags
-        env:
-          GITHUB_TOKEN: ${{ secrets.MY_CUSTOM_NPM_TOKEN }}
+    - name: Lint and Build
+      run: |
+        npm run lint
+        npm run build
 
-      - name: Publish to NPM
-        run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+    - name: Publish to npm
+      run: npm publish --access public
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
